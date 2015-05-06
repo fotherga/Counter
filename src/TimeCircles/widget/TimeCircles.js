@@ -114,6 +114,7 @@ define([
         // Attach events to HTML dom elements
         _setupEvents: function () {
             var bg_width = mx.parser.parseValue(this.backgroundWidth.substring(1), "integer");
+            var fg_width = mx.parser.parseValue("0." + this.foregroundWidth.substring(1), "float");
             
             this._options = {
                 "animation": this.animationBehavior,
