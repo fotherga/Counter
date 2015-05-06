@@ -23,15 +23,6 @@
                 <attributeType name="Long" />
             </attributeTypes>
         </property>
-        <property key="timeCircleType" type="enumeration" required="true" defaultValue="countdown">
-            <caption>Time Circle Type</caption>
-            <category>Behavior</category>
-            <description>Which type to use: a countdown or a timer.</description>
-            <enumerationValues>
-                <enumerationValue key="countdown">Countdown</enumerationValue>
-                <enumerationValue key="timer">Timer</enumerationValue>
-            </enumerationValues>
-        </property>
         <property key="animationBehavior" type="enumeration" required="true" defaultValue="smooth">
             <caption>Animation Behavior</caption>
             <category>Behavior</category>

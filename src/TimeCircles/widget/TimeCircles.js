@@ -6,15 +6,15 @@
     ========================
 
     @file      : TimeCircles.js
-    @version   : 0.1
+    @version   : 0.2
     @author    : Chad Evans
-    @date      : Fri, 01 May 2015 20:39:04 GMT
-    @copyright : Apache License, Version 2.0, January 2004
-    @license   : Apache 2
+    @date      : 06 May 2015
+    @copyright : Mendix Technology BV
+    @license   : Apache License, Version 2.0, January 2004
 
     Documentation
     ========================
-    Describe your widget here.
+    Adds ability to show a datetime countdown or a timer in a Mendix app.
 */
 
 // Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
@@ -40,7 +40,6 @@ define([
         // Parameters configured in the Modeler.
         targetDateTimeAttr: "",
         timerValueAttr: "",
-        timeCircleType: "",
         animationBehavior: "",
         oncompletemf: "",
         showDays: false,
@@ -159,13 +158,11 @@ define([
             if (this._contextObj !== null) {
                 domStyle.set(this.tcNode, 'display', 'block');
 
-                if (this.timeCircleType === 'countdown') {
-                    if (this.targetDateTimeAttr !== '') {
-                        var startString = mx.parser.formatAttribute(this._contextObj, this.targetDateTimeAttr, {
-                            datePattern: "yyyy-MM-dd hh:mm:ss"
-                        });
-                        domAttr.set(this.tcNode, 'data-date', startString);
-                    }
+                if (this.targetDateTimeAttr !== '') {
+                    var startString = mx.parser.formatAttribute(this._contextObj, this.targetDateTimeAttr, {
+                        datePattern: "yyyy-MM-dd hh:mm:ss"
+                    });
+                    domAttr.set(this.tcNode, 'data-date', startString);
                 } else {
                     if (this.timerValueAttr !== '') {
                         domAttr.set(this.tcNode, 'data-timer', this._contextObj.get(this.timerValueAttr));
