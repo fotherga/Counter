@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="TimeCircles.widget.TimeCircles" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>TimeCircles</name>
+    <description>The description of this widget.</description>
+
+    <icon></icon>
+
+    <properties>
+        <property key="targetDateTimeAttr" type="attribute" required="false">
+            <caption>Target DateTime Attribute</caption>
+            <category>Behavior</category>
+            <description>The attribute that contains the datetime to countdown to.</description>
+            <attributeTypes>
+                <attributeType name="DateTime" />
+            </attributeTypes>
+        </property>
+        <property key="timerValueAttr" type="attribute" required="false">
+            <caption>Timer Value Attribute</caption>
+            <category>Behavior</category>
+            <description>The attribute that contains timer value</description>
+            <attributeTypes>
+                <attributeType name="Integer" />
+                <attributeType name="Long" />
+            </attributeTypes>
+        </property>
+        <property key="timeCircleType" type="enumeration" required="true" defaultValue="countdown">
+            <caption>Time Circle Type</caption>
+            <category>Behavior</category>
+            <description>Which type to use: a countdown or a timer.</description>
+            <enumerationValues>
+                <enumerationValue key="countdown">Countdown</enumerationValue>
+                <enumerationValue key="timer">Timer</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="animationBehavior" type="enumeration" required="true" defaultValue="smooth">
+            <caption>Animation Behavior</caption>
+            <category>Behavior</category>
+            <description>How the animation is displayed: smooth or ticks</description>
+            <enumerationValues>
+                <enumerationValue key="smooth">Smooth</enumerationValue>
+                <enumerationValue key="ticks">Ticks</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="oncompletemf" type="microflow" required="false" defaultValue="">
+            <caption>On Complete</caption>
+            <category>Behavior</category>
+            <description>The microflow to execute on click.</description>
+            <returnType type="Boolean"></returnType>
+        </property>
+        <property key="showDays" type="boolean" required="true" defaultValue="false">
+            <caption>Show Days</caption>
+            <category>Appearance</category>
+            <description>Show days in the TimeCircle</description>
+        </property>
+        <property key="daysText" type="translatableString" required="true">
+            <caption>Days Text</caption>
+            <category>Appearance</category>
+            <description>Display text for Days</description>
+            <translations>
+                <translation lang="en_US">Days</translation>
+            </translations>
+        </property>
+        <property key="daysColor" type="string" required="true" defaultValue="#FFCC66">
+            <caption>Days Color</caption>
+            <category>Appearance</category>
+            <description>Color for Days</description>
+        </property>
+        <property key="showHours" type="boolean" required="true" defaultValue="true">
+            <caption>Show Hours</caption>
+            <category>Appearance</category>
+            <description>Show hours in the TimeCircle</description>
+        </property>
+        <property key="hoursText" type="translatableString" required="true">
+            <caption>Hours Text</caption>
+            <category>Appearance</category>
+            <description>Display text for Hours</description>
+            <translations>
+                <translation lang="en_US">Hours</translation>
+            </translations>
+        </property>
+        <property key="hoursColor" type="string" required="true" defaultValue="#99CCFF">
+            <caption>Hours Color</caption>
+            <category>Appearance</category>
+            <description>Color for Hours</description>
+        </property>
+        <property key="showMinutes" type="boolean" required="true" defaultValue="true">
+            <caption>Show Minutes</caption>
+            <category>Appearance</category>
+            <description>Show minutes in the TimeCircle</description>
+        </property>
+        <property key="minutesText" type="translatableString" required="true">
+            <caption>Minutes Text</caption>
+            <category>Appearance</category>
+            <description>Display text for Minutes</description>
+            <translations>
+                <translation lang="en_US">Minutes</translation>
+            </translations>
+        </property>
+        <property key="minutesColor" type="string" required="true" defaultValue="#BBFFBB">
+            <caption>Minutes Color</caption>
+            <category>Appearance</category>
+            <description>Color for Minutes</description>
+        </property>
+        <property key="showSeconds" type="boolean" required="true" defaultValue="true">
+            <caption>Show Seconds</caption>
+            <category>Appearance</category>
+            <description>Show seconds in the TimeCircle</description>
+        </property>
+        <property key="secondsText" type="translatableString" required="true">
+            <caption>Seconds Text</caption>
+            <category>Appearance</category>
+            <description>Display text for Seconds</description>
+            <translations>
+                <translation lang="en_US">Seconds</translation>
+            </translations>
+        </property>
+        <property key="secondsColor" type="string" required="true" defaultValue="#FF9999">
+            <caption>Seconds Color</caption>
+            <category>Appearance</category>
+            <description>Color for Seconds</description>
+        </property>
+        <property key="circleBackgroundColor" type="string" required="true" defaultValue="#60686F">
+            <caption>Circle Background Color</caption>
+            <category>Appearance</category>
+            <description>Color for the background of the circle</description>
+        </property>
+        <property key="extraoptions" type="string" defaultValue="" required="false" multiline="true">
+            <caption>Extra options</caption>
+            <category>Features</category>
+            <description>In general, this property should be omitted. This property can be used to add additional options (in JSON format) to the widget when constructing. For a full description of the available options, see https://github.com/wimbarelds/TimeCircles.</description>
+        </property>
+    </properties>
+</widget>
+
