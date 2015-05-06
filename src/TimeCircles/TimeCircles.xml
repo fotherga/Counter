@@ -3,7 +3,7 @@
     <name>TimeCircles</name>
     <description>The description of this widget.</description>
 
-    <icon></icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAACiUExURT2B1j6B1kCD1kOE10mI2EyK2U+M2VCM2VGO2lKO2liS21uU3F6W3V+X3WSa3nam4nem4nup44y05o+255G355K455S555a76Je76Ji86Jm86Ju+6Z7A6qDB6qLC6qLC66PD66bF7KrH7KzJ7bHM7bTO7rXP78XZ8sfa8sjb887f9NXk9dnm9trn997q99/q9+Dr+Ojw+enx+uvy+vv9/v///xPxjRMAAADYSURBVCjPfZLrGoFAEIY/yikUklMrikRFir3/WzMVrSXm1z7zzumbWfAfhuoV7pzt4fwFvBlb9gBovgRSizG26hJAY5QJEMzJb5tTU1eAZvv4Ain57U0Rd3cJqdkTUB0rejVN+oBRAo/iIzHnlXIOBZgxtnlX4NJsOQgpQZJ2p5QzgR11kEXreS3wNWMLGZjA9h/4Waq2eVyOa9eOy73JsJMI/6USyMfA4FoJFyvhtxaguDVL5CeVDqHoZrF2qIE4VGagMiOVTrvXSvfHaXOLfcfx45pf8mEP1yRZxc7vSrQAAAAASUVORK5CYII=</icon>
 
     <properties>
         <property key="targetDateTimeAttr" type="attribute" required="false">
@@ -17,7 +17,7 @@
         <property key="timerValueAttr" type="attribute" required="false">
             <caption>Timer Value Attribute</caption>
             <category>Behavior</category>
-            <description>The attribute that contains timer value</description>
+            <description>The attribute that contains timer value, in seconds</description>
             <attributeTypes>
                 <attributeType name="Integer" />
                 <attributeType name="Long" />
@@ -35,17 +35,17 @@
         <property key="oncompletemf" type="microflow" required="false" defaultValue="">
             <caption>On Complete</caption>
             <category>Behavior</category>
-            <description>The microflow to execute on click.</description>
+            <description>The microflow to execute on click</description>
             <returnType type="Boolean"></returnType>
         </property>
         <property key="showDays" type="boolean" required="true" defaultValue="false">
             <caption>Show Days</caption>
-            <category>Appearance</category>
+            <category>Display</category>
             <description>Show days in the TimeCircle</description>
         </property>
         <property key="daysText" type="translatableString" required="true">
             <caption>Days Text</caption>
-            <category>Appearance</category>
+            <category>Display</category>
             <description>Display text for Days</description>
             <translations>
                 <translation lang="en_US">Days</translation>
@@ -58,12 +58,12 @@
         </property>
         <property key="showHours" type="boolean" required="true" defaultValue="true">
             <caption>Show Hours</caption>
-            <category>Appearance</category>
+            <category>Display</category>
             <description>Show hours in the TimeCircle</description>
         </property>
         <property key="hoursText" type="translatableString" required="true">
             <caption>Hours Text</caption>
-            <category>Appearance</category>
+            <category>Display</category>
             <description>Display text for Hours</description>
             <translations>
                 <translation lang="en_US">Hours</translation>
@@ -76,12 +76,12 @@
         </property>
         <property key="showMinutes" type="boolean" required="true" defaultValue="true">
             <caption>Show Minutes</caption>
-            <category>Appearance</category>
+            <category>Display</category>
             <description>Show minutes in the TimeCircle</description>
         </property>
         <property key="minutesText" type="translatableString" required="true">
             <caption>Minutes Text</caption>
-            <category>Appearance</category>
+            <category>Display</category>
             <description>Display text for Minutes</description>
             <translations>
                 <translation lang="en_US">Minutes</translation>
@@ -94,12 +94,12 @@
         </property>
         <property key="showSeconds" type="boolean" required="true" defaultValue="true">
             <caption>Show Seconds</caption>
-            <category>Appearance</category>
+            <category>Display</category>
             <description>Show seconds in the TimeCircle</description>
         </property>
         <property key="secondsText" type="translatableString" required="true">
             <caption>Seconds Text</caption>
-            <category>Appearance</category>
+            <category>Display</category>
             <description>Display text for Seconds</description>
             <translations>
                 <translation lang="en_US">Seconds</translation>
@@ -114,6 +114,50 @@
             <caption>Circle Background Color</caption>
             <category>Appearance</category>
             <description>Color for the background of the circle</description>
+        </property>
+        <property key="foregroundWidth" type="enumeration" required="true" defaultValue="_10">
+            <caption>Foreground Circle Width</caption>
+            <category>Display</category>
+            <description>Width of the foreground circle as percentage of the circle's diameter</description>
+            <enumerationValues>
+                <enumerationValue key="_15">15%</enumerationValue>
+                <enumerationValue key="_14">14%</enumerationValue>
+                <enumerationValue key="_13">13%</enumerationValue>
+                <enumerationValue key="_12">12%</enumerationValue>
+                <enumerationValue key="_11">11%</enumerationValue>
+                <enumerationValue key="_10">10%</enumerationValue>
+                <enumerationValue key="_09">9%</enumerationValue>
+                <enumerationValue key="_08">8%</enumerationValue>
+                <enumerationValue key="_07">7%</enumerationValue>
+                <enumerationValue key="_06">6%</enumerationValue>
+                <enumerationValue key="_05">5%</enumerationValue>
+                <enumerationValue key="_04">4%</enumerationValue>
+                <enumerationValue key="_03">3%</enumerationValue>
+                <enumerationValue key="_02">2%</enumerationValue>
+                <enumerationValue key="_01">1%</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="backgroundWidth" type="enumeration" required="true" defaultValue="_120">
+            <caption>Background Circle Width</caption>
+            <category>Display</category>
+            <description>Width of the background circle as percentage of forground circle's width</description>
+            <enumerationValues>
+                <enumerationValue key="_150">150%</enumerationValue>
+                <enumerationValue key="_140">140%</enumerationValue>
+                <enumerationValue key="_130">130%</enumerationValue>
+                <enumerationValue key="_120">120%</enumerationValue>
+                <enumerationValue key="_110">110%</enumerationValue>
+                <enumerationValue key="_100">100%</enumerationValue>
+                <enumerationValue key="_090">90%</enumerationValue>
+                <enumerationValue key="_080">80%</enumerationValue>
+                <enumerationValue key="_070">70%</enumerationValue>
+                <enumerationValue key="_060">60%</enumerationValue>
+                <enumerationValue key="_050">50%</enumerationValue>
+                <enumerationValue key="_040">40%</enumerationValue>
+                <enumerationValue key="_030">30%</enumerationValue>
+                <enumerationValue key="_020">20%</enumerationValue>
+                <enumerationValue key="_010">10%</enumerationValue>
+            </enumerationValues>
         </property>
         <property key="extraoptions" type="string" defaultValue="" required="false" multiline="true">
             <caption>Extra options</caption>

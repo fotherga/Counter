@@ -6,7 +6,7 @@
     ========================
 
     @file      : TimeCircles.js
-    @version   : 0.2
+    @version   : 0.3
     @author    : Chad Evans
     @date      : 06 May 2015
     @copyright : Mendix Technology BV
@@ -55,6 +55,8 @@ define([
         secondsText: "",
         secondsColor: "",
         circleBackgroundColor: "",
+        foregroundWidth: "",
+        backgroundWidth: "",
         extraoptions: "",
 
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
@@ -109,19 +111,14 @@ define([
             $(this.tcNode).TimeCircles().destroy();
         },
 
-        // We want to stop events on a mobile device
-        _stopBubblingEventOnMobile: function (e) {
-            if (typeof document.ontouchstart !== 'undefined') {
-                event.stop(e);
-            }
-        },
-
         // Attach events to HTML dom elements
         _setupEvents: function () {
+            var bg_width = mx.parser.parseValue(this.backgroundWidth.substring(1), "integer");
+            
             this._options = {
                 "animation": this.animationBehavior,
-                "bg_width": 1.0,
-                "fg_width": 0.08,
+                "bg_width": bg_width / 100,
+                "fg_width": fg_width,
                 "circle_bg_color": this.circleBackgroundColor,
                 "count_past_zero": false,
                 "time": {
@@ -157,15 +154,18 @@ define([
         _updateRendering: function () {
             if (this._contextObj !== null) {
                 domStyle.set(this.tcNode, 'display', 'block');
+                
+                var valueString;
 
                 if (this.targetDateTimeAttr !== '') {
-                    var startString = mx.parser.formatAttribute(this._contextObj, this.targetDateTimeAttr, {
-                        datePattern: "yyyy-MM-dd hh:mm:ss"
+                    valueString = mx.parser.formatAttribute(this._contextObj, this.targetDateTimeAttr, {
+                        datePattern: "yyyy-MM-dd HH:mm:ss"
                     });
-                    domAttr.set(this.tcNode, 'data-date', startString);
+                    domAttr.set(this.tcNode, 'data-date', valueString);
                 } else {
                     if (this.timerValueAttr !== '') {
-                        domAttr.set(this.tcNode, 'data-timer', this._contextObj.get(this.timerValueAttr));
+                        valueString = this._contextObj.get(this.timerValueAttr);
+                        domAttr.set(this.tcNode, 'data-timer', valueString);
                     }
                 }
 
