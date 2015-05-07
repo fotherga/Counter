@@ -1,4 +1,4 @@
-# TimeCircles
+# CountdownAndTimer
 
 This widget allows Mendix to show either a datetime countdown or a timer. This utilizes the TimeCircles library found at https://github.com/wimbarelds/TimeCircles.
 
@@ -14,6 +14,14 @@ Use this when you want to show a countdown to a datetime or to show a timer. All
 
 Steps to get this widget working in a Mendix app:
 
-1. Drop the widget into a data view, template grid, or list view.
-2. Set either the Target DateTime Attribute or Timer Value Attribute.
+### Countdown
+
+1. Drop the widget into a data view, template grid, or list view with the target datetime.
+2. Set the Target DateTime Attribute.
+3. Configure the visible circles (day, hour, minute, second), colors used, and display text.
+
+### Timer
+
+1. Drop the widget into a data view, template grid, or list view with the number of seconds.
+2. Set the Timer Value Attribute.
 3. Configure the visible circles (day, hour, minute, second), colors used, and display text.

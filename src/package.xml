@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://www.mendix.com/package/1.0/">
-	<clientModule name="TimeCircles" version="0.3" xmlns="http://www.mendix.com/clientModule/1.0/">
+	<clientModule name="Counter" version="0.4" xmlns="http://www.mendix.com/clientModule/1.0/">
 		<widgetFiles>
-			<widgetFile path="TimeCircles/TimeCircles.xml"/>
+			<widgetFile path="Counter/Counter.xml"/>
 		</widgetFiles>
 		<files>
-			<file path="TimeCircles/widget/"/>
+			<file path="Counter/widget/"/>
 		</files>
 	</clientModule>
 </package>

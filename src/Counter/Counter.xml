@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="TimeCircles.widget.TimeCircles" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
-    <name>TimeCircles</name>
-    <description>The description of this widget.</description>
+<widget id="Counter.widget.Counter" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>Counter</name>
+    <description>Provides a countdown to a date and a timer.</description>
 
     <icon>iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAACiUExURT2B1j6B1kCD1kOE10mI2EyK2U+M2VCM2VGO2lKO2liS21uU3F6W3V+X3WSa3nam4nem4nup44y05o+255G355K455S555a76Je76Ji86Jm86Ju+6Z7A6qDB6qLC6qLC66PD66bF7KrH7KzJ7bHM7bTO7rXP78XZ8sfa8sjb887f9NXk9dnm9trn997q99/q9+Dr+Ojw+enx+uvy+vv9/v///xPxjRMAAADYSURBVCjPfZLrGoFAEIY/yikUklMrikRFir3/WzMVrSXm1z7zzumbWfAfhuoV7pzt4fwFvBlb9gBovgRSizG26hJAY5QJEMzJb5tTU1eAZvv4Ain57U0Rd3cJqdkTUB0rejVN+oBRAo/iIzHnlXIOBZgxtnlX4NJsOQgpQZJ2p5QzgR11kEXreS3wNWMLGZjA9h/4Waq2eVyOa9eOy73JsJMI/6USyMfA4FoJFyvhtxaguDVL5CeVDqHoZrF2qIE4VGagMiOVTrvXSvfHaXOLfcfx45pf8mEP1yRZxc7vSrQAAAAASUVORK5CYII=</icon>
 

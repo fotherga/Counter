@@ -2,13 +2,13 @@
 /*global mx, define, require, browser, devel, console, document, jQuery */
 /*mendix */
 /*
-    TimeCircles
+    Counter
     ========================
 
-    @file      : TimeCircles.js
-    @version   : 0.3
+    @file      : Counter.js
+    @version   : 0.4
     @author    : Chad Evans
-    @date      : 06 May 2015
+    @date      : 07 May 2015
     @copyright : Mendix Technology BV
     @license   : Apache License, Version 2.0, January 2004
 
@@ -22,7 +22,7 @@ define([
     'dojo/_base/declare', 'mxui/widget/_WidgetBase', 'dijit/_TemplatedMixin',
     'mxui/dom', 'dojo/dom', 'dojo/query', 'dojo/dom-class', 'dojo/dom-style',
     'dojo/dom-attr', 'dojo/_base/array', 'dojo/_base/lang', 'dojo/text', 'dojo/json', 'dojo/html', 'dojo/_base/event',
-    'TimeCircles/lib/jquery-1.11.2.min', 'dojo/text!TimeCircles/widget/template/TimeCircles.html'
+    'Counter/lib/jquery-1.11.2.min', 'dojo/text!Counter/widget/template/Counter.html'
 ], function (declare, _WidgetBase, _TemplatedMixin,
     dom, dojoDom, domQuery, domClass, domStyle,
     domAttr, dojoArray, lang, text, json, html, event,
@@ -32,7 +32,7 @@ define([
     var $ = jQuery.noConflict(true);
 
     // Declare widget's prototype.
-    return declare('TimeCircles.widget.TimeCircles', [_WidgetBase, _TemplatedMixin], {
+    return declare('Counter.widget.Counter', [_WidgetBase, _TemplatedMixin], {
 
         // _TemplatedMixin will create our dom node using this HTML template.
         templateString: widgetTemplate,
@@ -252,6 +252,6 @@ define([
         }
     });
 });
-require(['TimeCircles/widget/TimeCircles'], function () {
+require(['Counter/widget/Counter'], function () {
     'use strict';
 });
