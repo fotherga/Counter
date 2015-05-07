@@ -6,7 +6,7 @@
     ========================
 
     @file      : Counter.js
-    @version   : 0.4
+    @version   : 1.0
     @author    : Chad Evans
     @date      : 07 May 2015
     @copyright : Mendix Technology BV
