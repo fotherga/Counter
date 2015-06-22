@@ -6,9 +6,9 @@
     ========================
 
     @file      : Counter.js
-    @version   : 1.0
+    @version   : 2.0
     @author    : Chad Evans
-    @date      : 07 May 2015
+    @date      : 17 June 2015
     @copyright : Mendix Technology BV
     @license   : Apache License, Version 2.0, January 2004
 
@@ -22,14 +22,14 @@ define([
     'dojo/_base/declare', 'mxui/widget/_WidgetBase', 'dijit/_TemplatedMixin',
     'mxui/dom', 'dojo/dom', 'dojo/query', 'dojo/dom-class', 'dojo/dom-style',
     'dojo/dom-attr', 'dojo/_base/array', 'dojo/_base/lang', 'dojo/text', 'dojo/json', 'dojo/html', 'dojo/_base/event',
-    'Counter/lib/jquery-1.11.2.min', 'dojo/text!Counter/widget/template/Counter.html'
+    'Counter/lib/jquery-1.11.2', 'Counter/lib/jquery.TimeCircles-1.5.3', 'dojo/text!Counter/widget/template/Counter.html'
 ], function (declare, _WidgetBase, _TemplatedMixin,
     dom, dojoDom, domQuery, domClass, domStyle,
     domAttr, dojoArray, lang, text, json, html, event,
-    _jQuery, widgetTemplate) {
+    _jQuery, _timecircles, widgetTemplate) {
     'use strict';
 
-    var $ = jQuery.noConflict(true);
+    var $ = _jQuery.noConflict(true);
 
     // Declare widget's prototype.
     return declare('Counter.widget.Counter', [_WidgetBase, _TemplatedMixin], {
@@ -71,7 +71,7 @@ define([
 
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
-            console.log(this.id + '.postCreate');
+            //console.log(this.id + '.postCreate');
 
             this._updateRendering();
             this._setupEvents();
@@ -79,7 +79,7 @@ define([
 
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
         update: function (obj, callback) {
-            console.log(this.id + '.update');
+            //console.log(this.id + '.update');
 
             this._contextObj = obj;
             this._resetSubscriptions();
@@ -96,7 +96,7 @@ define([
 
         // mxui.widget._WidgetBase.resize is called when the page's layout is recalculated. Implement to do sizing calculations. Prefer using CSS instead.
         resize: function (box) {
-            console.log(this.id + '.resize');
+            //console.log(this.id + '.resize');
 
             $(this.tcNode).TimeCircles().rebuild();
         },
@@ -156,7 +156,7 @@ define([
             if (this._contextObj !== null) {
                 domStyle.set(this.tcNode, 'display', 'block');
                 
-                var valueString;
+                var valueString, jqueryTcNode;
 
                 if (this.targetDateTimeAttr !== '') {
                     valueString = mx.parser.formatAttribute(this._contextObj, this.targetDateTimeAttr, {
@@ -171,14 +171,15 @@ define([
                 }
 
                 // clear out old values
-                $(this.tcNode).removeData();
+                jqueryTcNode = $(this.tcNode);
+                jqueryTcNode.removeData();
 
-                $(this.tcNode).TimeCircles().destroy();
+                jqueryTcNode.TimeCircles().destroy();
 
-                $(this.tcNode).TimeCircles(this._options);
+                jqueryTcNode.TimeCircles(this._options);
 
                 if (this.oncompletemf !== '') {
-                    $(this.tcNode).TimeCircles().addListener(lang.hitch(this, this._onComplete), 'visible');
+                    jqueryTcNode.TimeCircles().addListener(lang.hitch(this, this._onComplete), 'visible');
                 }
             } else {
                 domStyle.set(this.tcNode, 'display', 'none');
