@@ -17,22 +17,32 @@
     Adds ability to show a datetime countdown or a timer in a Mendix app.
 */
 
-// Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
 define([
-    'dojo/_base/declare', 'mxui/widget/_WidgetBase', 'dijit/_TemplatedMixin',
-    'mxui/dom', 'dojo/dom', 'dojo/query', 'dojo/dom-class', 'dojo/dom-style',
-    'dojo/dom-attr', 'dojo/_base/array', 'dojo/_base/lang', 'dojo/text', 'dojo/json', 'dojo/html', 'dojo/_base/event',
-    'Counter/lib/jquery-1.11.2', 'Counter/lib/jquery.TimeCircles-1.5.3', 'dojo/text!Counter/widget/template/Counter.html'
-], function (declare, _WidgetBase, _TemplatedMixin,
-    dom, dojoDom, domQuery, domClass, domStyle,
-    domAttr, dojoArray, lang, text, json, html, event,
-    _jQuery, _timecircles, widgetTemplate) {
-    'use strict';
+    "dojo/_base/declare",
+     "mxui/widget/_WidgetBase",
+     "dijit/_TemplatedMixin",
+    "mxui/dom",
+    "dojo/dom",
+    "dojo/query",
+    "dojo/dom-class",
+    "dojo/dom-style",
+    "dojo/dom-attr",
+    "dojo/_base/array",
+    "dojo/_base/lang",
+    "dojo/text",
+    "dojo/json",
+    "dojo/html",
+    "dojo/_base/event",
+    "Counter/lib/jquery-1.11.2",
+    "Counter/lib/jquery.TimeCircles-1.5.3",
+     "dojo/text!Counter/widget/template/Counter.html"
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, domQuery, domClass, domStyle, domAttr, dojoArray, lang, text, json, html, event, _jQuery, _timecircles, widgetTemplate) {
+    "use strict";
 
     var $ = _jQuery.noConflict(true);
 
-    // Declare widget's prototype.
-    return declare('Counter.widget.Counter', [_WidgetBase, _TemplatedMixin], {
+    // Declare widget"s prototype.
+    return declare("Counter.widget.Counter", [_WidgetBase, _TemplatedMixin], {
 
         // _TemplatedMixin will create our dom node using this HTML template.
         templateString: widgetTemplate,
@@ -64,58 +74,46 @@ define([
         _contextObj: null,
         _options: null,
 
-        // dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
         constructor: function () {
             this._handles = [];
         },
 
-        // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
-            //console.log(this.id + '.postCreate');
+            logger.debug(this.id + ".postCreate");
 
             this._updateRendering();
             this._setupEvents();
         },
 
-        // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
         update: function (obj, callback) {
-            //console.log(this.id + '.update');
+            logger.debug(this.id + ".update");
 
             this._contextObj = obj;
             this._resetSubscriptions();
-            this._updateRendering();
-
-            callback();
+            this._updateRendering(callback);
         },
 
-        // mxui.widget._WidgetBase.enable is called when the widget should enable editing. Implement to enable editing if widget is input widget.
         enable: function () {},
 
-        // mxui.widget._WidgetBase.enable is called when the widget should disable editing. Implement to disable editing if widget is input widget.
         disable: function () {},
 
-        // mxui.widget._WidgetBase.resize is called when the page's layout is recalculated. Implement to do sizing calculations. Prefer using CSS instead.
         resize: function (box) {
-            //console.log(this.id + '.resize');
-
+            logger.debug(this.id + ".resize");
             $(this.tcNode).TimeCircles().rebuild();
         },
 
-        // mxui.widget._WidgetBase.uninitialize is called when the widget is destroyed. Implement to do special tear-down work.
         uninitialize: function () {
-            // Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
+            logger.debug(this.id + ".uninitialize");
 
-            // clear out old values
             $(this.tcNode).removeData();
-
             $(this.tcNode).TimeCircles().destroy();
         },
 
-        // Attach events to HTML dom elements
         _setupEvents: function () {
+            logger.debug(this.id + "._setupEvents");
             var bg_width = mx.parser.parseValue(this.backgroundWidth.substring(1), "integer");
             var fg_width = mx.parser.parseValue("0." + this.foregroundWidth.substring(1), "float");
-            
+
             this._options = {
                 "animation": this.animationBehavior,
                 "bg_width": bg_width / 100,
@@ -146,51 +144,53 @@ define([
                 }
             };
 
-            if (this.extraoptions !== '') {
+            if (this.extraoptions !== "") {
                 lang.mixin(this._options, json.parse(this.extraoptions));
             }
         },
 
-        // Rerender the interface.
-        _updateRendering: function () {
+        _updateRendering: function (callback) {
+            logger.debug(this.id + "._updateRendering");
+
             if (this._contextObj !== null) {
-                domStyle.set(this.tcNode, 'display', 'block');
-                
+                domStyle.set(this.tcNode, "display", "block");
+
                 var valueString, jqueryTcNode;
 
-                if (this.targetDateTimeAttr !== '') {
+                if (this.targetDateTimeAttr !== "") {
                     valueString = mx.parser.formatAttribute(this._contextObj, this.targetDateTimeAttr, {
                         datePattern: "yyyy-MM-dd HH:mm:ss"
                     });
-                    domAttr.set(this.tcNode, 'data-date', valueString);
+                    domAttr.set(this.tcNode, "data-date", valueString);
                 } else {
-                    if (this.timerValueAttr !== '') {
+                    if (this.timerValueAttr !== "") {
                         valueString = this._contextObj.get(this.timerValueAttr);
-                        domAttr.set(this.tcNode, 'data-timer', valueString);
+                        domAttr.set(this.tcNode, "data-timer", valueString);
                     }
                 }
 
                 // clear out old values
                 jqueryTcNode = $(this.tcNode);
                 jqueryTcNode.removeData();
-
                 jqueryTcNode.TimeCircles().destroy();
-
                 jqueryTcNode.TimeCircles(this._options);
 
-                if (this.oncompletemf !== '') {
-                    jqueryTcNode.TimeCircles().addListener(lang.hitch(this, this._onComplete), 'visible');
+                if (this.oncompletemf !== "") {
+                    jqueryTcNode.TimeCircles().addListener(lang.hitch(this, this._onComplete), "visible");
                 }
             } else {
-                domStyle.set(this.tcNode, 'display', 'none');
+                domStyle.set(this.tcNode, "display", "none");
             }
+
+            mendix.lang.nullExec(callback);
         },
 
         _onComplete: function (unit, value, total) {
+            logger.debug(this.id + "._onComplete");
             if (total === 0) {
                 mx.data.action({
                     params: {
-                        applyto: 'selection',
+                        applyto: "selection",
                         actionname: this.oncompletemf,
                         guids: [this._contextObj.getGuid()]
                     },
@@ -198,14 +198,14 @@ define([
                         //TODO what to do when all is ok!
                     },
                     error: lang.hitch(this, function (error) {
-                        console.log(this.id + ': An error occurred while executing microflow: ' + error.description);
+                        console.log(this.id + ": An error occurred while executing microflow: " + error.description);
                     })
                 }, this);
             }
         },
 
-        // Reset subscriptions.
         _resetSubscriptions: function () {
+            logger.debug(this.id + "._resetSubscriptions");
             var _objectHandle = null,
                 _attrHandle = null,
                 _timerAttrHandle = null;
@@ -218,7 +218,7 @@ define([
                 this._handles = [];
             }
 
-            // When a mendix object exists create subscribtions. 
+            // When a mendix object exists create subscribtions.
             if (this._contextObj) {
 
                 _objectHandle = this.subscribe({
@@ -228,7 +228,7 @@ define([
                     })
                 });
 
-                if (this.targetDateTimeAttr !== '') {
+                if (this.targetDateTimeAttr !== "") {
                     _attrHandle = this.subscribe({
                         guid: this._contextObj.getGuid(),
                         attr: this.targetDateTimeAttr,
@@ -238,7 +238,7 @@ define([
                     });
                 }
 
-                if (this.timerValueAttr !== '') {
+                if (this.timerValueAttr !== "") {
                     _timerAttrHandle = this.subscribe({
                         guid: this._contextObj.getGuid(),
                         attr: this.timerValueAttr,
@@ -253,6 +253,7 @@ define([
         }
     });
 });
-require(['Counter/widget/Counter'], function () {
-    'use strict';
+
+require(["Counter/widget/Counter"], function () {
+    "use strict";
 });
