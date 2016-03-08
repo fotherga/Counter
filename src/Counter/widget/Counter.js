@@ -33,10 +33,11 @@ define([
     "dojo/json",
     "dojo/html",
     "dojo/_base/event",
-    "Counter/lib/jquery-1.11.2",
-    "Counter/lib/jquery.TimeCircles-1.5.3",
-     "dojo/text!Counter/widget/template/Counter.html"
-], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, domQuery, domClass, domStyle, domAttr, dojoArray, lang, text, json, html, event, _jQuery, _timecircles, widgetTemplate) {
+    "Counter/lib/jquery",
+    "dojo/text!Counter/widget/template/Counter.html",
+
+    "Counter/lib/jquery.TimeCircles-1.5.3"
+], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, domQuery, domClass, domStyle, domAttr, dojoArray, lang, text, json, html, event, _jQuery, widgetTemplate) {
     "use strict";
 
     var $ = _jQuery.noConflict(true);
