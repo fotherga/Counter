@@ -25,3 +25,9 @@ Steps to get this widget working in a Mendix app:
 1. Drop the widget into a data view, template grid, or list view with the number of seconds.
 2. Set the Timer Value Attribute.
 3. Configure the visible circles (day, hour, minute, second), colors used, and display text.
+
+## Libraries
+
+This widget uses
+  * [jQuery](http://jquery.com/), [MIT License](https://github.com/jquery/jquery/blob/master/LICENSE.txt)
+  * [TimeCircles](https://github.com/wimbarelds/TimeCircles), [MIT License](https://github.com/wimbarelds/TimeCircles/blob/master/MIT.txt)

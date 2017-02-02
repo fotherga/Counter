@@ -1,6 +1,3 @@
-/*jslint white:true, nomen: true, plusplus: true */
-/*global mx, define, require, browser, devel, console, document, jQuery */
-/*mendix */
 /*
     Counter
     ========================
@@ -19,30 +16,21 @@
 
 define([
     "dojo/_base/declare",
-     "mxui/widget/_WidgetBase",
-     "dijit/_TemplatedMixin",
-    "mxui/dom",
-    "dojo/dom",
-    "dojo/query",
-    "dojo/dom-class",
+    "mxui/widget/_WidgetBase",
+    "dijit/_TemplatedMixin",
     "dojo/dom-style",
     "dojo/dom-attr",
-    "dojo/_base/array",
     "dojo/_base/lang",
-    "dojo/text",
     "dojo/json",
-    "dojo/html",
-    "dojo/_base/event",
     "Counter/lib/jquery",
     "dojo/text!Counter/widget/template/Counter.html",
 
     "Counter/lib/jquery.TimeCircles-1.5.3"
-], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, domQuery, domClass, domStyle, domAttr, dojoArray, lang, text, json, html, event, _jQuery, widgetTemplate) {
+], function(declare, _WidgetBase, _TemplatedMixin, domStyle, domAttr, lang, json, _jQuery, widgetTemplate) {
     "use strict";
 
     var $ = _jQuery.noConflict(true);
 
-    // Declare widget"s prototype.
     return declare("Counter.widget.Counter", [_WidgetBase, _TemplatedMixin], {
 
         // _TemplatedMixin will create our dom node using this HTML template.
@@ -75,18 +63,18 @@ define([
         _contextObj: null,
         _options: null,
 
-        constructor: function () {
+        constructor: function() {
             this._handles = [];
         },
 
-        postCreate: function () {
+        postCreate: function() {
             logger.debug(this.id + ".postCreate");
 
             this._updateRendering();
             this._setupEvents();
         },
 
-        update: function (obj, callback) {
+        update: function(obj, callback) {
             logger.debug(this.id + ".update");
 
             this._contextObj = obj;
@@ -94,23 +82,19 @@ define([
             this._updateRendering(callback);
         },
 
-        enable: function () {},
-
-        disable: function () {},
-
-        resize: function (box) {
+        resize: function(box) {
             logger.debug(this.id + ".resize");
             $(this.tcNode).TimeCircles().rebuild();
         },
 
-        uninitialize: function () {
+        uninitialize: function() {
             logger.debug(this.id + ".uninitialize");
 
             $(this.tcNode).removeData();
             $(this.tcNode).TimeCircles().destroy();
         },
 
-        _setupEvents: function () {
+        _setupEvents: function() {
             logger.debug(this.id + "._setupEvents");
             var bg_width = mx.parser.parseValue(this.backgroundWidth.substring(1), "integer");
             var fg_width = mx.parser.parseValue("0." + this.foregroundWidth.substring(1), "float");
@@ -150,7 +134,7 @@ define([
             }
         },
 
-        _updateRendering: function (callback) {
+        _updateRendering: function(callback) {
             logger.debug(this.id + "._updateRendering");
 
             if (this._contextObj !== null) {
@@ -183,78 +167,69 @@ define([
                 domStyle.set(this.tcNode, "display", "none");
             }
 
-            mendix.lang.nullExec(callback);
+            this._executeCallback(callback, "_updateRendering");
         },
 
-        _onComplete: function (unit, value, total) {
-            logger.debug(this.id + "._onComplete");
+        _onComplete: function(unit, value, total) {
             if (total === 0) {
-                mx.data.action({
+                logger.debug(this.id + "._onComplete");
+                mx.ui.action(this.oncompletemf, {
                     params: {
                         applyto: "selection",
-                        actionname: this.oncompletemf,
                         guids: [this._contextObj.getGuid()]
                     },
-                    callback: function (obj) {
+                    callback: function(obj) {
                         //TODO what to do when all is ok!
                     },
-                    error: lang.hitch(this, function (error) {
+                    error: lang.hitch(this, function(error) {
                         console.log(this.id + ": An error occurred while executing microflow: " + error.description);
                     })
                 }, this);
             }
         },
 
-        _resetSubscriptions: function () {
+        _resetSubscriptions: function() {
             logger.debug(this.id + "._resetSubscriptions");
-            var _objectHandle = null,
-                _attrHandle = null,
-                _timerAttrHandle = null;
-
-            // Release handles on previous object, if any.
-            if (this._handles) {
-                this._handles.forEach(function (handle, i) {
-                    mx.data.unsubscribe(handle);
-                });
-                this._handles = [];
-            }
+            this.unsubscribeAll();
 
             // When a mendix object exists create subscribtions.
             if (this._contextObj) {
-
-                _objectHandle = this.subscribe({
+                this.subscribe({
                     guid: this._contextObj.getGuid(),
-                    callback: lang.hitch(this, function (guid) {
+                    callback: lang.hitch(this, function(guid) {
                         this._updateRendering();
                     })
                 });
 
                 if (this.targetDateTimeAttr !== "") {
-                    _attrHandle = this.subscribe({
+                    this.subscribe({
                         guid: this._contextObj.getGuid(),
                         attr: this.targetDateTimeAttr,
-                        callback: lang.hitch(this, function (guid, attr, attrValue) {
+                        callback: lang.hitch(this, function(guid, attr, attrValue) {
                             this._updateRendering();
                         })
                     });
                 }
 
                 if (this.timerValueAttr !== "") {
-                    _timerAttrHandle = this.subscribe({
+                    this.subscribe({
                         guid: this._contextObj.getGuid(),
                         attr: this.timerValueAttr,
-                        callback: lang.hitch(this, function (guid, attr, attrValue) {
+                        callback: lang.hitch(this, function(guid, attr, attrValue) {
                             this._updateRendering();
                         })
                     });
                 }
+            }
+        },
 
-                this._handles = [_objectHandle, _attrHandle, _timerAttrHandle];
+        _executeCallback: function(cb, from) {
+            logger.debug(this.id + "._executeCallback" + (from ? " from " + from : ""));
+            if (cb && typeof cb === "function") {
+                cb();
             }
         }
     });
 });
 
-require(["Counter/widget/Counter"], function () {
-    "use strict";
-});
+require(["Counter/widget/Counter"]);
