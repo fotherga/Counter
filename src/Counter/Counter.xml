@@ -32,6 +32,11 @@
                 <enumerationValue key="ticks">Ticks</enumerationValue>
             </enumerationValues>
         </property>
+         <property key="countPastZero" type="boolean" required="true" defaultValue="false">
+            <caption>Count Past Zero</caption>
+            <category>Behavior</category>
+            <description>When NO, the widget will count down to the specified date. When Yes, the widget will either count up or reverse direction and start counting up. Note that when Yes, the on complete microflow will execute only after the count down has completed.</description>
+        </property>
         <property key="oncompletemf" type="microflow" required="false" defaultValue="">
             <caption>On Complete</caption>
             <category>Behavior</category>

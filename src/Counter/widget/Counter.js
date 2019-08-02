@@ -57,6 +57,7 @@ define([
         foregroundWidth: "",
         backgroundWidth: "",
         extraoptions: "",
+        countPastZero: "",
 
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
@@ -104,7 +105,7 @@ define([
                 "bg_width": bg_width / 100,
                 "fg_width": fg_width,
                 "circle_bg_color": this.circleBackgroundColor,
-                "count_past_zero": false,
+                "count_past_zero": this.countPastZero,
                 "time": {
                     "Days": {
                         "text": this.daysText,
